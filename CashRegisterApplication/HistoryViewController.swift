@@ -6,6 +6,9 @@
 //
 
 import UIKit
+protocol HistoryViewControllerDelegate: AnyObject {
+    func didUpdateStock()
+}
 
 class HistoryViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate, UIPickerViewDataSource  {
     
@@ -14,18 +17,15 @@ class HistoryViewController: UIViewController,UITableViewDelegate,UITableViewDat
     @IBOutlet weak var productPicker: UIPickerView!
     
     @IBOutlet weak var historyTableView: UITableView!
+    weak var delegate: HistoryViewControllerDelegate?
     
-    var history: [(name: String, quantity: Int, total: Double, date: Date)] = [
-        ("Hat", 2, 20.0, Date()),
-        ("Shirt", 1, 20.0, Date())
-    ]
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         historyTableView.delegate=self
         historyTableView.dataSource=self
-        historyTableView.reloadData()
         
         productPicker.delegate = self
         productPicker.dataSource = self
@@ -33,6 +33,21 @@ class HistoryViewController: UIViewController,UITableViewDelegate,UITableViewDat
         // Do any additional setup after loading the view.
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        historyTableView.reloadData()
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return ProductStore.shared.history.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath)
+        let record = ProductStore.shared.history[indexPath.row]
+        cell.textLabel?.text = "\(record.name) - \(record.quantity) pcs - $\(record.total)"
+        return cell
+    }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -45,16 +60,8 @@ class HistoryViewController: UIViewController,UITableViewDelegate,UITableViewDat
         let product = ProductStore.shared.products[row]
         return "\(product.name) (Stock: \(product.quantity))"
     }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return history.count
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath)
-        let record = history[indexPath.row]
-        cell.textLabel?.text = "\(record.name) - \(record.quantity) pcs -$\(record.total) on \(record.date)"
-        return cell
-    }
+    
     
     func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -67,30 +74,26 @@ class HistoryViewController: UIViewController,UITableViewDelegate,UITableViewDat
         dismiss(animated: true, completion: nil)
     }
     @IBAction func restockPressed(_ sender: UIButton) {
-         
-            guard let newQuantity = Int(quantityField.text ?? ""), newQuantity > 0 else {
-                showAlert(title: "Error", message: "Enter a valid quantity")
-                return
-            }
-            
-            let selectedIndex = productPicker.selectedRow(inComponent: 0)
-            
-            
-            ProductStore.shared.products[selectedIndex].quantity += newQuantity
-            
-           
-            let restockedProduct = ProductStore.shared.products[selectedIndex]
-            history.append((name: restockedProduct.name, quantity: newQuantity, total: 0.0, date: Date()))
-            
-            
-            productPicker.reloadAllComponents()
-            historyTableView.reloadData()
-            
-          
-            showAlert(title: "Success", message: "\(restockedProduct.name) restocked by \(newQuantity) units!")
-            
-           
-            quantityField.text = ""
+        
+        guard let newQuantity = Int(quantityField.text ?? ""), newQuantity > 0 else {
+            showAlert(title: "Error", message: "Enter a valid quantity")
+            return
+        }
+        
+        let selectedIndex = productPicker.selectedRow(inComponent: 0)
+        ProductStore.shared.products[selectedIndex].quantity += newQuantity
+        
+      
+        delegate?.didUpdateStock()
+        
+        productPicker.reloadAllComponents()
+        historyTableView.reloadData()
+        showAlert(title: "Success", message: "\(ProductStore.shared.products[selectedIndex].name) restocked by \(newQuantity) units!")
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.dismiss(animated: true, completion: nil)
         }
     }
-
+    
+}
