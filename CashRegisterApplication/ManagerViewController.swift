@@ -18,8 +18,23 @@ class ManagerViewController: UIViewController {
     @IBAction func backButtonPressed(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-    @IBAction func historyButtonPressed(_ sender: UIButton) { 
-        performSegue(withIdentifier: "goToHistory", sender: self)
-    }
+    
 
+
+    @IBAction func restockPressed(_ sender: Any) {
+        performSegue(withIdentifier: "goToRestock", sender: self)
+    }
+    
+    @IBAction func purchaseHistoryPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "goToPurchaseHistory", sender: self)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToRestock" {
+            if let restockVC = segue.destination as? RestockViewController {
+                if let mainVC = presentingViewController as? MainViewController {
+                    restockVC.delegate = mainVC 
+                }
+            }
+        }
+    }
 }

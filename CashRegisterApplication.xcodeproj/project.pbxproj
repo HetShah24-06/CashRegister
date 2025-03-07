@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D334C4522D7B3D6C0052F25C /* PurchaseHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D334C4512D7B3D6C0052F25C /* PurchaseHistoryTableViewController.swift */; };
+		D334C4542D7B429D0052F25C /* RestockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D334C4532D7B429D0052F25C /* RestockViewController.swift */; };
 		D3503C342D6E4B7000EE43AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3503C332D6E4B7000EE43AC /* AppDelegate.swift */; };
 		D3503C362D6E4B7000EE43AC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3503C352D6E4B7000EE43AC /* SceneDelegate.swift */; };
 		D3503C382D6E4B7000EE43AC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3503C372D6E4B7000EE43AC /* ViewController.swift */; };
@@ -17,10 +19,11 @@
 		D3503C4A2D6E4BF300EE43AC /* ProductStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3503C492D6E4BF300EE43AC /* ProductStore.swift */; };
 		D3503C4C2D6E4F9200EE43AC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3503C4B2D6E4F9200EE43AC /* MainViewController.swift */; };
 		D3503C4E2D6E56DF00EE43AC /* ManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3503C4D2D6E56DF00EE43AC /* ManagerViewController.swift */; };
-		D3503C502D6E587200EE43AC /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3503C4F2D6E587200EE43AC /* HistoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D334C4512D7B3D6C0052F25C /* PurchaseHistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseHistoryTableViewController.swift; sourceTree = "<group>"; };
+		D334C4532D7B429D0052F25C /* RestockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestockViewController.swift; sourceTree = "<group>"; };
 		D3503C302D6E4B7000EE43AC /* CashRegisterApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CashRegisterApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3503C332D6E4B7000EE43AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3503C352D6E4B7000EE43AC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -33,7 +36,6 @@
 		D3503C492D6E4BF300EE43AC /* ProductStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductStore.swift; sourceTree = "<group>"; };
 		D3503C4B2D6E4F9200EE43AC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D3503C4D2D6E56DF00EE43AC /* ManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerViewController.swift; sourceTree = "<group>"; };
-		D3503C4F2D6E587200EE43AC /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +79,8 @@
 				D3503C492D6E4BF300EE43AC /* ProductStore.swift */,
 				D3503C4B2D6E4F9200EE43AC /* MainViewController.swift */,
 				D3503C4D2D6E56DF00EE43AC /* ManagerViewController.swift */,
-				D3503C4F2D6E587200EE43AC /* HistoryViewController.swift */,
+				D334C4512D7B3D6C0052F25C /* PurchaseHistoryTableViewController.swift */,
+				D334C4532D7B429D0052F25C /* RestockViewController.swift */,
 			);
 			path = CashRegisterApplication;
 			sourceTree = "<group>";
@@ -155,12 +158,13 @@
 			files = (
 				D3503C4A2D6E4BF300EE43AC /* ProductStore.swift in Sources */,
 				D3503C382D6E4B7000EE43AC /* ViewController.swift in Sources */,
+				D334C4542D7B429D0052F25C /* RestockViewController.swift in Sources */,
 				D3503C482D6E4BBE00EE43AC /* Product.swift in Sources */,
 				D3503C4C2D6E4F9200EE43AC /* MainViewController.swift in Sources */,
 				D3503C342D6E4B7000EE43AC /* AppDelegate.swift in Sources */,
 				D3503C362D6E4B7000EE43AC /* SceneDelegate.swift in Sources */,
 				D3503C4E2D6E56DF00EE43AC /* ManagerViewController.swift in Sources */,
-				D3503C502D6E587200EE43AC /* HistoryViewController.swift in Sources */,
+				D334C4522D7B3D6C0052F25C /* PurchaseHistoryTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

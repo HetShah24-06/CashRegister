@@ -7,8 +7,8 @@
 
 import UIKit
 
-class MainViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,HistoryViewControllerDelegate {
-    
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, RestockViewControllerDelegate {
+
     
     
     @IBOutlet weak var productLabel: UILabel!
@@ -35,18 +35,12 @@ class MainViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         super.viewWillAppear(animated)
         productTableView.reloadData()
     }
-    func didUpdateStock() {
-        DispatchQueue.main.async {
-            self.productTableView.reloadData()
-        }
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToHistory" {
-            if let historyVC = segue.destination as? HistoryViewController {
-                historyVC.delegate = self
-            }
-        }
-    }
+    func didRestock() {
+           DispatchQueue.main.async {
+               self.productTableView.reloadData()
+           }
+       }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ProductStore.shared.products.count
